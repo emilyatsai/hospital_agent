@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Kidney Stone Predictor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-flask"></i> Kidney Stone Prediction
+                </h4>
+            </div>
+            <div class="card-body">
+                <p class="lead text-muted mb-4">
+                    Enter the urine analysis parameters below to predict the likelihood of kidney stone formation.
+                </p>
+
+                <form id="predictionForm" method="POST" action="{{ url_for('predict') }}">
+                    <div class="row">
+                        <!-- Gravity -->
+                        <div class="col-md-6 mb-3">
+                            <label for="gravity" class="form-label">
+                                <i class="fas fa-balance-scale"></i> Specific Gravity
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="number" step="0.001" class="form-control" id="gravity" name="gravity"
+                                   placeholder="1.010 - 1.035" required>
+                            <div class="form-text">Urine specific gravity (density)</div>
+                        </div>
+
+                        <!-- pH -->
+                        <div class="col-md-6 mb-3">
+                            <label for="ph" class="form-label">
+                                <i class="fas fa-vial"></i> pH Level
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="number" step="0.01" class="form-control" id="ph" name="ph"
+                                   placeholder="4.0 - 8.0" required>
+                            <div class="form-text">Urine pH level</div>
+                        </div>
+
+                        <!-- Osmolarity -->
+                        <div class="col-md-6 mb-3">
+                            <label for="osmo" class="form-label">
+                                <i class="fas fa-molecule"></i> Osmolarity
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="number" step="1" class="form-control" id="osmo" name="osmo"
+                                   placeholder="100 - 1400" required>
+                            <div class="form-text">Urine osmolarity (mOsm/L)</div>
+                        </div>
+
+                        <!-- Conductivity -->
+                        <div class="col-md-6 mb-3">
+                            <label for="cond" class="form-label">
+                                <i class="fas fa-bolt"></i> Conductivity
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="number" step="0.1" class="form-control" id="cond" name="cond"
+                                   placeholder="5.0 - 40.0" required>
+                            <div class="form-text">Urine conductivity (mS/cm)</div>
+                        </div>
+
+                        <!-- Urea -->
+                        <div class="col-md-6 mb-3">
+                            <label for="urea" class="form-label">
+                                <i class="fas fa-flask"></i> Urea
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="number" step="1" class="form-control" id="urea" name="urea"
+                                   placeholder="10 - 700" required>
+                            <div class="form-text">Urea concentration (mg/dL)</div>
+                        </div>
+
+                        <!-- Calcium -->
+                        <div class="col-md-6 mb-3">
+                            <label for="calc" class="form-label">
+                                <i class="fas fa-calculator"></i> Calcium
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="number" step="0.01" class="form-control" id="calc" name="calc"
+                                   placeholder="0.0 - 15.0" required>
+                            <div class="form-text">Calcium concentration (mg/dL)</div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <button type="button" class="btn btn-outline-secondary me-md-2" onclick="clearForm()">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-brain"></i> Predict Kidney Stone Risk
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Sample Data Section -->
+                <div class="mt-4">
+                    <h6 class="text-muted">
+                        <i class="fas fa-info-circle"></i> Sample Values (for testing):
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small class="text-muted">
+                                <strong>Normal:</strong> Gravity: 1.021, pH: 4.91, Osmolarity: 725, Conductivity: 14.0, Urea: 443, Calcium: 2.45
+                            </small>
+                        </div>
+                        <div class="col-md-6">
+                            <small class="text-muted">
+                                <strong>High Risk:</strong> Gravity: 1.034, pH: 5.24, Osmolarity: 1236, Conductivity: 27.3, Urea: 620, Calcium: 12.68
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Cards -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-chart-line fa-2x text-success mb-3"></i>
+                        <h6 class="card-title">AI-Powered</h6>
+                        <p class="card-text small text-muted">Using IBM Watson AutoML for accurate predictions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+                        <h6 class="card-title">Medical Data</h6>
+                        <p class="card-text small text-muted">Based on clinical urine analysis parameters</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-clock fa-2x text-warning mb-3"></i>
+                        <h6 class="card-title">Real-time</h6>
+                        <p class="card-text small text-muted">Get instant prediction results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function clearForm() {
+    document.getElementById('predictionForm').reset();
+}
+
+// Form validation
+document.getElementById('predictionForm').addEventListener('submit', function(e) {
+    const inputs = this.querySelectorAll('input[required]');
+    let isValid = true;
+
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
+            input.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            input.classList.remove('is-invalid');
+        }
+    });
+
+    if (!isValid) {
+        e.preventDefault();
+        alert('Please fill in all required fields.');
+    }
+});
+</script>
+{% endblock %}

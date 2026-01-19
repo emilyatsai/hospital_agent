@@ -1,0 +1,43 @@
+# Watson Studio credentials and configuration
+config.json
+*.key
+*.pem
+
+# Logs and temporary files
+*.log
+*.tmp
+experiment_run.log
+watson_automl.log
+
+# Data files (uncomment if you want to exclude processed data)
+# kidney_stone_data.csv
+# kidney_stone_raw_data.csv
+
+# Visualizations and reports
+visualizations/
+data_report.txt
+scaler_info.json
+deployment_info.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,8 +1,12 @@
-import { Menu, X, Phone, MapPin } from 'lucide-react';
+import { Menu, X, Phone, MapPin, User, LogOut } from 'lucide-react';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAuthenticated, user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-100">
@@ -25,6 +29,11 @@ const Header = () => {
             <a href="#services" className="text-gray-700 hover:text-primary-600 transition-colors">Services</a>
             <a href="#about" className="text-gray-700 hover:text-primary-600 transition-colors">About</a>
             <a href="#contact" className="text-gray-700 hover:text-primary-600 transition-colors">Contact</a>
+            {isAuthenticated && (
+              <Link to="/dashboard" className="text-gray-700 hover:text-primary-600 transition-colors">
+                Dashboard
+              </Link>
+            )}
           </nav>
 
           {/* Contact Info */}
@@ -39,10 +48,49 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Emergency Button */}
-          <button className="hidden md:block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
-            Emergency
-          </button>
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-3">
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-3">
+                <span className="text-sm text-gray-600">
+                  {user?.user_metadata?.full_name || user?.email}
+                </span>
+                <button
+                  onClick={() => navigate('/dashboard')}
+                  className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 transition-colors"
+                >
+                  <User className="w-4 h-4" />
+                  <span className="text-sm">Dashboard</span>
+                </button>
+                <button
+                  onClick={signOut}
+                  className="flex items-center space-x-1 text-red-600 hover:text-red-700 transition-colors"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span className="text-sm">Logout</span>
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-3">
+                <Link
+                  to="/login"
+                  className="text-gray-700 hover:text-primary-600 transition-colors text-sm font-medium"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/login"
+                  className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                >
+                  Get Started
+                </Link>
+              </div>
+            )}
+            {/* Emergency Button - always visible */}
+            <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
+              Emergency
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -61,6 +109,36 @@ const Header = () => {
               <a href="#services" className="text-gray-700 hover:text-primary-600 transition-colors px-2 py-1">Services</a>
               <a href="#about" className="text-gray-700 hover:text-primary-600 transition-colors px-2 py-1">About</a>
               <a href="#contact" className="text-gray-700 hover:text-primary-600 transition-colors px-2 py-1">Contact</a>
+
+              {isAuthenticated ? (
+                <>
+                  <Link to="/dashboard" className="text-gray-700 hover:text-primary-600 transition-colors px-2 py-1">
+                    Dashboard
+                  </Link>
+                  <div className="px-2 py-1 text-sm text-gray-600">
+                    {user?.user_metadata?.full_name || user?.email}
+                  </div>
+                  <button
+                    onClick={signOut}
+                    className="text-red-600 hover:text-red-700 transition-colors px-2 py-1 text-left"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="text-gray-700 hover:text-primary-600 transition-colors px-2 py-1">
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/login"
+                    className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors w-fit"
+                  >
+                    Get Started
+                  </Link>
+                </>
+              )}
+
               <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors w-fit">
                 Emergency
               </button>

@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block title %}Data Information - Kidney Stone Predictor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <div class="card shadow">
+            <div class="card-header bg-secondary text-white">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-database"></i> Dataset Information
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Kidney Stone Dataset Overview</h5>
+                        <p>
+                            This application uses a clinical dataset containing urine analysis parameters
+                            from patients, used to predict the formation of kidney stones (calculi).
+                        </p>
+
+                        <h6 class="mt-4">Dataset Characteristics</h6>
+                        <ul>
+                            <li><strong>Total Samples:</strong> 100+ clinical urine analysis records</li>
+                            <li><strong>Features:</strong> 6 urine analysis parameters</li>
+                            <li><strong>Target Variable:</strong> Kidney stone presence (0 = No, 1 = Yes)</li>
+                            <li><strong>Data Source:</strong> Clinical laboratory measurements</li>
+                            <li><strong>Data Quality:</strong> Pre-processed and validated</li>
+                        </ul>
+
+                        <h6 class="mt-4">Feature Descriptions</h6>
+                        <div class="accordion" id="featureAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#gravity">
+                                        Specific Gravity (gravity)
+                                    </button>
+                                </h2>
+                                <div id="gravity" class="accordion-collapse collapse show" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body small">
+                                        Urine specific gravity measures the concentration of particles in urine.
+                                        Values typically range from 1.010 to 1.025. Higher values indicate more concentrated urine.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ph">
+                                        pH Level (ph)
+                                    </button>
+                                </h2>
+                                <div id="ph" class="accordion-collapse collapse" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body small">
+                                        Urine pH measures acidity/alkalinity. Normal range is 4.5-8.0.
+                                        More alkaline urine (higher pH) may increase kidney stone risk.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#osmo">
+                                        Osmolarity (osmo)
+                                    </button>
+                                </h2>
+                                <div id="osmo" class="accordion-collapse collapse" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body small">
+                                        Measures solute concentration in urine (mOsm/L).
+                                        Normal range: 300-900 mOsm/L. Higher values indicate concentrated urine.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cond">
+                                        Conductivity (cond)
+                                    </button>
+                                </h2>
+                                <div id="cond" class="accordion-collapse collapse" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body small">
+                                        Electrical conductivity of urine (mS/cm). Related to ion concentration.
+                                        Normal range: 8.0-22.0 mS/cm.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#urea">
+                                        Urea Concentration (urea)
+                                    </button>
+                                </h2>
+                                <div id="urea" class="accordion-collapse collapse" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body small">
+                                        Urea nitrogen concentration in urine (mg/dL).
+                                        Normal range: 10-50 mg/dL. Related to protein metabolism.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#calc">
+                                        Calcium Concentration (calc)
+                                    </button>
+                                </h2>
+                                <div id="calc" class="accordion-collapse collapse" data-bs-parent="#featureAccordion">
+                                    <div class="accordion-body small">
+                                        Calcium concentration in urine (mg/dL). Normal range: 0.0-4.0 mg/dL.
+                                        Elevated levels are a major risk factor for kidney stone formation.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Dataset Statistics</h6>
+                                <div class="small">
+                                    <div class="mb-2">
+                                        <strong>Class Distribution:</strong><br>
+                                        No Kidney Stone: ~70%<br>
+                                        Kidney Stone: ~30%
+                                    </div>
+                                    <div class="mb-2">
+                                        <strong>Missing Values:</strong><br>
+                                        None (pre-processed)
+                                    </div>
+                                    <div class="mb-2">
+                                        <strong>Data Types:</strong><br>
+                                        All features: Numeric
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card bg-info text-white mt-3">
+                            <div class="card-body text-center">
+                                <i class="fas fa-chart-pie fa-2x mb-2"></i>
+                                <h6>Balanced Dataset</h6>
+                                <p class="small mb-0">Clinical samples with realistic class distribution</p>
+                            </div>
+                        </div>
+
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h6 class="card-title">Download Sample Data</h6>
+                                <p class="small text-muted mb-2">
+                                    The dataset used for training contains clinical urine analysis measurements.
+                                </p>
+                                <button class="btn btn-outline-primary btn-sm" disabled>
+                                    <i class="fas fa-download"></i> Dataset Available
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Risk Factors for Kidney Stones</h5>
+                        <div class="alert alert-warning">
+                            <h6><i class="fas fa-exclamation-triangle"></i> Key Indicators</h6>
+                            <ul class="small mb-0">
+                                <li><strong>High Calcium:</strong> Elevated urine calcium levels</li>
+                                <li><strong>Concentrated Urine:</strong> High specific gravity/osmolarity</li>
+                                <li><strong>Alkaline pH:</strong> Higher pH levels</li>
+                                <li><strong>Low Fluid Intake:</strong> Correlates with concentrated urine</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Model Performance</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">Expected Accuracy</h6>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" style="width: 85%">85%</div>
+                                </div>
+                                <small class="text-muted">
+                                    Based on cross-validation with clinical data.<br>
+                                    Individual predictions may vary.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

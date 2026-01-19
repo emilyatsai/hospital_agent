@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result - Kidney Stone Predictor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <!-- Prediction Result Card -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-{{ 'danger' if result.prediction else 'success' }} text-white">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-{{ 'exclamation-triangle' if result.prediction else 'check-circle' }}"></i>
+                    Prediction Result
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    {% if result.prediction %}
+                        <div class="alert alert-danger">
+                            <h5 class="alert-heading">
+                                <i class="fas fa-exclamation-triangle fa-2x"></i>
+                            </h5>
+                            <h4 class="alert-heading">High Risk of Kidney Stone</h4>
+                            <p class="mb-0">The analysis indicates a potential risk of kidney stone formation.</p>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success">
+                            <h5 class="alert-heading">
+                                <i class="fas fa-check-circle fa-2x"></i>
+                            </h5>
+                            <h4 class="alert-heading">Low Risk of Kidney Stone</h4>
+                            <p class="mb-0">The analysis indicates a low risk of kidney stone formation.</p>
+                        </div>
+                    {% endif %}
+
+                    <div class="mt-3">
+                        <h5>Confidence Level</h5>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-{{ 'danger' if result.prediction else 'success' }}"
+                                 role="progressbar"
+                                 style="width: {{ result.confidence }}%"
+                                 aria-valuenow="{{ result.confidence }}"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                                {{ result.confidence }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Summary -->
+                <h5 class="mt-4 mb-3">
+                    <i class="fas fa-list-alt"></i> Input Parameters
+                </h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Specific Gravity</h6>
+                                <p class="card-text h4 text-primary">{{ "%.3f"|format(result.input_data.gravity) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">pH Level</h6>
+                                <p class="card-text h4 text-primary">{{ "%.2f"|format(result.input_data.ph) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Osmolarity</h6>
+                                <p class="card-text h4 text-primary">{{ "%.0f"|format(result.input_data.osmo) }} mOsm/L</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Conductivity</h6>
+                                <p class="card-text h4 text-primary">{{ "%.1f"|format(result.input_data.cond) }} mS/cm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Urea</h6>
+                                <p class="card-text h4 text-primary">{{ "%.0f"|format(result.input_data.urea) }} mg/dL</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Calcium</h6>
+                                <p class="card-text h4 text-primary">{{ "%.2f"|format(result.input_data.calc) }} mg/dL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-redo"></i> Make Another Prediction
+                    </a>
+                    <button onclick="window.print()" class="btn btn-outline-secondary">
+                        <i class="fas fa-print"></i> Print Results
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Disclaimer -->
+        <div class="card border-warning">
+            <div class="card-body">
+                <h6 class="card-title text-warning">
+                    <i class="fas fa-exclamation-triangle"></i> Medical Disclaimer
+                </h6>
+                <p class="card-text small text-muted">
+                    This prediction is based on machine learning analysis of urine analysis parameters and should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider for medical concerns and before making any health-related decisions.
+                </p>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-info-circle text-info"></i> What This Means
+                        </h6>
+                        <ul class="list-unstyled small">
+                            {% if result.prediction %}
+                                <li><i class="fas fa-times text-danger"></i> Higher calcium levels may contribute to stone formation</li>
+                                <li><i class="fas fa-times text-danger"></i> Consider consulting a urologist</li>
+                                <li><i class="fas fa-times text-danger"></i> Dietary changes may be recommended</li>
+                            {% else %}
+                                <li><i class="fas fa-check text-success"></i> Parameters within normal ranges</li>
+                                <li><i class="fas fa-check text-success"></i> Low risk based on current analysis</li>
+                                <li><i class="fas fa-check text-success"></i> Continue regular health monitoring</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-chart-bar text-primary"></i> About the Model
+                        </h6>
+                        <p class="card-text small">
+                            This prediction uses IBM Watson AutoML technology trained on clinical urine analysis data. The model analyzes multiple parameters simultaneously to provide risk assessment.
+                        </p>
+                        <div class="small text-muted">
+                            <strong>Confidence:</strong> {{ result.confidence }}%<br>
+                            <strong>Model:</strong> AutoML Generated<br>
+                            <strong>Data Points:</strong> 100+ clinical samples
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

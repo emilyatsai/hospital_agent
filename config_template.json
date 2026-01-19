@@ -1,0 +1,41 @@
+{
+  "api_key": "ApiKey-775bc795-8eb4-4aae-a19b-e585a5319123",
+  "deployment_url": "YOUR_WATSON_ML_DEPLOYMENT_URL_HERE",
+
+  "example_deployment_url": "https://private.au-syd.ml.cloud.ibm.com/ml/v4/deployments/YOUR_DEPLOYMENT_ID/predictions?version=2021-05-01",
+
+  "instructions": {
+    "step_1": "Get your IBM Cloud API key from: https://cloud.ibm.com/iam/apikeys",
+    "step_2": "Deploy your model in Watson Studio and get the deployment URL",
+    "step_3": "Replace YOUR_DEPLOYMENT_ID with your actual deployment ID",
+    "step_4": "Update the region in the URL if different (au-syd, us-south, etc.)"
+  },
+
+  "features": [
+    "gravity",
+    "ph",
+    "osmo",
+    "cond",
+    "urea",
+    "calc"
+  ],
+
+  "sample_data": {
+    "normal": {
+      "gravity": 1.021,
+      "ph": 4.91,
+      "osmo": 725,
+      "cond": 14.0,
+      "urea": 443,
+      "calc": 2.45
+    },
+    "high_risk": {
+      "gravity": 1.034,
+      "ph": 5.24,
+      "osmo": 1236,
+      "cond": 27.3,
+      "urea": 620,
+      "calc": 12.68
+    }
+  }
+}

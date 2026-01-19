@@ -1,6 +1,9 @@
 import { ArrowRight, Shield, Clock, Award } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Hero = () => {
+  const { isAuthenticated } = useAuth();
   return (
     <section className="bg-gradient-to-br from-primary-50 to-white px-6 py-16 lg:px-8 lg:py-24">
       <div className="max-w-7xl mx-auto">
@@ -18,11 +21,23 @@ const Hero = () => {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-primary-600 hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
-                <span>Book Appointment</span>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                to={isAuthenticated ? "/dashboard" : "/login"}
+                className="bg-primary-600 hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+              >
+                <span>{isAuthenticated ? "Go to Dashboard" : "Book Appointment"}</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
+              <a
+                href="https://docs.google.com/forms/d/1yjwfv-_CEIwQKobHrOOiGg74ZQhIvfiizGRqIaecvMU/edit?usp=drive_web&ouid=103773772428437438189"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+              >
+                <span>Book an Appointment</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
               <button className="bg-white hover:bg-gray-50 text-primary-600 font-medium px-6 py-3 rounded-lg border border-primary-600 transition-colors duration-200">
                 Learn More
               </button>

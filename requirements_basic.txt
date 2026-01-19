@@ -1,0 +1,22 @@
+# Basic requirements (without pandas for Python 3.13 compatibility)
+
+# IBM Watson Machine Learning SDK
+ibm-watson-machine-learning>=1.0.264
+
+# IBM Cloud SDK Core for authentication
+ibm-cloud-sdk-core>=3.16.0
+
+# Web Framework
+Flask>=2.0.0
+Werkzeug>=2.0.0
+
+# Data processing (lightweight alternatives to pandas)
+numpy>=1.21.0
+
+# Additional utilities
+requests>=2.25.0
+python-dotenv>=0.19.0
+
+# Optional: For enhanced web features
+Flask-WTF>=1.0.0
+Flask-CORS>=3.0.0

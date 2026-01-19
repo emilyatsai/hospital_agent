@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}About - Kidney Stone Predictor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-info-circle"></i> About Kidney Stone Predictor
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>What is Kidney Stone Prediction?</h5>
+                        <p>
+                            Kidney stones are hard deposits made of minerals and salts that form inside your kidneys.
+                            This web application uses artificial intelligence to analyze urine analysis parameters and
+                            predict the likelihood of kidney stone formation.
+                        </p>
+
+                        <h5 class="mt-4">How It Works</h5>
+                        <ol>
+                            <li><strong>Data Input:</strong> Enter urine analysis parameters (specific gravity, pH, osmolarity, etc.)</li>
+                            <li><strong>AI Analysis:</strong> IBM Watson AutoML processes the data using machine learning algorithms</li>
+                            <li><strong>Risk Assessment:</strong> Receive a prediction with confidence level</li>
+                            <li><strong>Medical Consultation:</strong> Use results as a guide for professional medical advice</li>
+                        </ol>
+
+                        <h5 class="mt-4">Technology Stack</h5>
+                        <ul>
+                            <li><strong>Frontend:</strong> Flask web framework with Bootstrap UI</li>
+                            <li><strong>AI/ML:</strong> IBM Watson AutoML service</li>
+                            <li><strong>Data Processing:</strong> Python with pandas and scikit-learn</li>
+                            <li><strong>Deployment:</strong> Cloud-based Watson Studio</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                                <h6>AI-Powered Prediction</h6>
+                                <p class="small text-muted">Using advanced machine learning algorithms</p>
+                            </div>
+                        </div>
+
+                        <div class="card bg-light mt-3">
+                            <div class="card-body text-center">
+                                <i class="fas fa-cloud fa-3x text-info mb-3"></i>
+                                <h6>IBM Watson</h6>
+                                <p class="small text-muted">Enterprise-grade AI platform</p>
+                            </div>
+                        </div>
+
+                        <div class="card bg-light mt-3">
+                            <div class="card-body text-center">
+                                <i class="fas fa-flask fa-3x text-success mb-3"></i>
+                                <h6>Flask Framework</h6>
+                                <p class="small text-muted">Lightweight web application</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Clinical Parameters Analyzed</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Unit</th>
+                                        <th>Normal Range</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Specific Gravity</td>
+                                        <td>-</td>
+                                        <td>1.010 - 1.025</td>
+                                    </tr>
+                                    <tr>
+                                        <td>pH</td>
+                                        <td>-</td>
+                                        <td>4.5 - 8.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Osmolarity</td>
+                                        <td>mOsm/L</td>
+                                        <td>300 - 900</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conductivity</td>
+                                        <td>mS/cm</td>
+                                        <td>8.0 - 22.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Urea</td>
+                                        <td>mg/dL</td>
+                                        <td>10 - 50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Calcium</td>
+                                        <td>mg/dL</td>
+                                        <td>0.0 - 4.0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Important Notes</h5>
+                        <div class="alert alert-warning">
+                            <h6><i class="fas fa-exclamation-triangle"></i> Medical Disclaimer</h6>
+                            <p class="small mb-0">
+                                This tool is for educational and informational purposes only.
+                                It is not a substitute for professional medical advice, diagnosis, or treatment.
+                                Always consult with qualified healthcare providers for medical concerns.
+                            </p>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-users"></i> For Healthcare Professionals</h6>
+                            <p class="small mb-0">
+                                This system can assist in preliminary risk assessment but should be used
+                                in conjunction with comprehensive clinical evaluation and patient history.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
